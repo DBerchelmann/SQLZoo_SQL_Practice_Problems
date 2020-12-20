@@ -13,3 +13,10 @@ Hope you have a great day!
 David
 
 December 19, 2020
+
+
+<h3>UPDATE</h3>
+
+*Please note* that first_exercises.sql holds the solutions from SELECT Basics and SELECT World. 
+
+**The remainder of the exericies will be held in their own respective files** *i.e.(nobel_excercises)*
