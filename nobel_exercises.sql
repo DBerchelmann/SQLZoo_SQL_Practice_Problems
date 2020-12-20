@@ -71,3 +71,43 @@ WHERE (yr < 1910 and subject IN ('Medicine')) OR (yr >= 2004 and subject IN ('Li
 SELECT *
 FROM nobel
 WHERE winner LIKE 'PETER G%G'
+
+# Find all details of the prize won by EUGENE O'NEILL'
+
+SELECT *
+FROM nobel
+WHERE winner LIKE 'EUGENE O%L'
+
+# Knights in order
+
+# List the winners, year and subject where the winner starts with Sir. Show the the most recent first, then by name order.
+
+SELECT winner, yr, subject
+FROM nobel
+WHERE winner LIKE 'SIR %'
+ORDER BY yr DESC;
+
+# The expression subject IN ('Chemistry','Physics') can be used as a value - it will be 0 or 1.
+# Show the 1984 winners and subject ordered by subject and winner name; but list Chemistry and Physics last.
+# 0 and the 1 are boolean values (1 is TRUE and 0 is FALSE)
+
+   winner	         subject	 subject IN (..
+Richard Stone	    Economics	    0
+Jaroslav Seifert	Literature	    0
+César Milstein	    Medicine	    0
+Georges J.F. Köhler	Medicine	    0
+Niels K. Jerne	    Medicine	    0
+Desmond Tutu	    Peace	        0
+Bruce Merrifield	Chemistry	    1
+Carlo Rubbia	    Physics	        1
+Simon van der Meer	Physics	        1
+
+SELECT winner, subject 
+FROM nobel
+WHERE yr=1984
+ORDER BY subject IN ('Physics','Chemistry'),subject,winner
+
+#PROPER SQL BELOW  for line 108 if we want it to work outside of MYSQL>>>i.e. ORACLE
+
+CASE WHEN subject in ('Physics', 'Chemistry') THEN 1 ELSE 0 END, 
+ subject, winner
