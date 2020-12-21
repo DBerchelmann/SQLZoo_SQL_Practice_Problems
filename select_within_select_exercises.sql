@@ -12,3 +12,20 @@ FROM world
 WHERE  continent = 'europe' AND gdp/population > (
     SELECT gdp/population
     FROM world WHERE name = 'United Kingdom')
+
+# List the name and continent of countries in the continents containing either Argentina or Australia. Order by name of the country.
+
+SELECT name, continent
+FROM world
+WHERE name IN (SELECT name FROM world WHERE continent = 'South America' OR continent = 'Oceania')
+ORDER BY name
+
+# Germany (population 80 million) has the largest population of the countries in Europe. Austria (population 8.5 million) has 11% of the population of Germany.
+# Show the name and the population of each country in Europe. Show the population as a percentage of the population of Germany.
+
+SELECT name, 
+       CONCAT(ROUND(100 * population/(SELECT population
+                                      FROM world 
+                                      WHERE name ='Germany')),'%' )AS percentage
+FROM world
+WHERE continent = 'Europe';
