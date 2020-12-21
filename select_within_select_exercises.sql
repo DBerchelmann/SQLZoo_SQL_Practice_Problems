@@ -35,3 +35,5 @@ WHERE continent = 'Europe';
 SELECT name
 FROM world
 WHERE gdp > ALL(SELECT gdp FROM world WHERE gdp > 0 and continent = 'Europe')
+
+
