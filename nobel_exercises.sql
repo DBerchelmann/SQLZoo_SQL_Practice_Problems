@@ -111,3 +111,9 @@ ORDER BY subject IN ('Physics','Chemistry'),subject,winner
 
 CASE WHEN subject in ('Physics', 'Chemistry') THEN 1 ELSE 0 END, 
  subject, winner
+
+ # SUM & COUNT exercices from nobel
+
+ # List each subject - just once
+ SELECT DISTINCT subject
+ FROM nobel;
