@@ -155,5 +155,35 @@ SELECT subject, COUNT(DISTINCT(yr))
 FROM nobel
 GROUP BY subject;
 
+# using HAVING function...Show the years in which three prizes were given for Physics.
+
+SELECT yr
+FROM nobel
+WHERE subject = 'Physics'
+GROUP BY yr
+HAVING count(subject) = 3;
+
+# Show winners who have won more than once.
+
+SELECT winner
+FROM nobel
+GROUP BY winner
+HAVING count(winner) > 1;
+
+# Show winners who have won more than one subject.
+
+SELECT winner
+FROM nobel
+GROUP BY winner
+HAVING COUNT(DISTINCT(subject)) > 1;
+
+# Show the year and subject where 3 prizes were given. Show only years 2000 onwards.
+
+SELECT yr, subject
+FROM nobel
+WHERE yr >= 2000
+GROUP BY yr, subject
+HAVING count(subject) = 3;
+
 
 
