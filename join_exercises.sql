@@ -39,3 +39,25 @@ WHERE player LIKE 'Mario%';
 SELECT player, teamid, coach, gtime
 FROM goal JOIN eteam ON (teamid=id)
 WHERE gtime<=10;
+
+# To JOIN game with eteam you could use either
+# game JOIN eteam ON (team1=eteam.id) or game JOIN eteam ON (team2=eteam.id)
+# Notice that because id is a column name in both game and eteam you must specify eteam.id instead of just id
+# List the dates of the matches and the name of the team in which 'Fernando Santos' was the team1 coach.
+
+SELECT mdate, teamname
+FROM game JOIN eteam ON (team1=eteam.id)
+WHERE coach = 'Fernando Santos';
+
+# List the player for every goal scored in a game where the stadium was 'National Stadium, Warsaw'
+
+SELECT player
+FROM game JOIN goal ON (id=matchid)
+WHERE stadium = 'National Stadium, Warsaw';
+
+# The example query shows all goals scored in the Germany-Greece quarterfinal.
+# Instead show the name of all players who scored a goal against Germany.
+
+SELECT DISTINCT player
+FROM game JOIN goal ON (matchid = id) 
+WHERE (team1='GER' OR team2='GER') AND teamid != 'GER';
