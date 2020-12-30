@@ -61,3 +61,30 @@ WHERE stadium = 'National Stadium, Warsaw';
 SELECT DISTINCT player
 FROM game JOIN goal ON (matchid = id) 
 WHERE (team1='GER' OR team2='GER') AND teamid != 'GER';
+
+# Show teamname and the total number of goals scored.
+
+SELECT teamname, count(gtime)
+FROM eteam JOIN goal ON id=teamid
+GROUP BY teamname
+ORDER BY teamname
+
+# Show the stadium and the number of goals scored in each stadium.
+
+SELECT stadium, count(gtime)
+FROM game JOIN goal ON id=matchid
+GROUP BY stadium;
+
+# For every match involving 'POL', show the matchid, date and the number of goals scored.
+
+SELECT id, mdate, count(gtime)
+FROM game JOIN goal ON id = matchid
+WHERE (team1 = 'POL' OR team2 = 'POL')
+GROUP BY id, mdate;
+
+# For every match where 'GER' scored, show matchid, match date and the number of goals scored by 'GER'
+
+SELECT matchid, mdate, COUNT(teamid)
+FROM game JOIN goal ON id=matchid
+WHERE teamid = 'GER'
+GROUP BY matchid, mdate;
