@@ -109,3 +109,15 @@ SELECT id, title, yr
 FROM movie
 WHERE title LIKE ('STAR TREK%')
 ORDER BY yr ASC;
+
+# Obtain the cast list for 'Casablanca'.
+
+SELECT name
+FROM casting JOIN actor ON id=actorid
+WHERE movieid = 11768;
+
+# Obtain the cast list for the film 'Alien'
+
+SELECT name
+FROM casting 
+     JOIN actor ON (id=actorid AND movieid = (SELECT id FROM movie WHERE title = 'Alien'));
