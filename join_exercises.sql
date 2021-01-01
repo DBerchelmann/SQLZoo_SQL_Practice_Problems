@@ -100,3 +100,12 @@ SELECT mdate,
     game LEFT JOIN goal ON (id = matchid)
     GROUP BY mdate,team1,team2
     ORDER BY mdate, matchid, team1, team2
+
+
+# List all of the Star Trek movies, include the id, title and yr
+# (all of these movies include the words Star Trek in the title). Order results by year.
+
+SELECT id, title, yr
+FROM movie
+WHERE title LIKE ('STAR TREK%')
+ORDER BY yr ASC;
