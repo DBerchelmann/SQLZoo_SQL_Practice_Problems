@@ -116,6 +116,12 @@ SELECT name
 FROM casting JOIN actor ON id=actorid
 WHERE movieid = 11768;
 
+# OR YOU CAN USE THE BELOW code
+
+SELECT name
+FROM actor JOIN casting ON actor.id=casting.actorid
+WHERE movieid = 11768;
+
 # Obtain the cast list for the film 'Alien'
 
 SELECT name
@@ -134,6 +140,15 @@ SELECT title
 FROM movie JOIN casting ON 
     (movieid=id AND actorid = (SELECT id FROM actor WHERE name = 'Harrison Ford' AND ord!= 1));
 
+# OR YOU CAN figure out the above problem using multiple JOIN operations instead of select within select
+
+SELECT title
+FROM casting
+     JOIN movie ON (casting.movieid=movie.id)
+     JOIN actor ON (casting.actorid=actor.id)
+WHERE name = 'Harrison Ford' AND
+      ord!=1;
+
     # List the films together with the leading star for all 1962 films.
 
     SELECT title, name
@@ -142,3 +157,34 @@ FROM casting
      JOIN actor ON (casting.actorid=actor.id)
 WHERE yr = 1962 AND
       ord = 1;
+
+# Which were the busiest years for 'Rock Hudson', show the year and the number of movies he made each year for any year in which he made more than 2 movies.
+
+SELECT yr,COUNT(title) 
+FROM
+  casting JOIN movie ON casting.movieid=movie.id
+          JOIN actor ON casting.actorid=actor.id
+WHERE name='Rock Hudson'
+GROUP BY yr
+HAVING COUNT(title) > 2
+
+# List the film title and the leading actor for all of the films 'Julie Andrews' played in.
+
+SELECT title, name
+FROM casting JOIN actor ON (casting.actorid=actor.id)
+             JOIN movie ON (casting.movieid=movie.id)
+WHERE movieid IN (
+                  SELECT movieid 
+                  FROM casting JOIN actor ON 
+                  (casting.actorid=actor.id)
+                  WHERE name = 'Julie Andrews')
+ AND ord=1;
+
+
+ Obtain a list, in alphabetical order, of actors who havve had at least 15 starring roles.
+
+ SELECT name
+FROM actor JOIN casting ON (actor.id=casting.actorid)
+WHERE ord = 1
+GROUP BY NAME
+HAVING COUNT(name) >= 15;
