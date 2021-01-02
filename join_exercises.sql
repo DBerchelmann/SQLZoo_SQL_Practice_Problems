@@ -133,3 +133,12 @@ FROM movie JOIN casting ON (movieid=id AND actorid = (SELECT id FROM actor WHERE
 SELECT title
 FROM movie JOIN casting ON 
     (movieid=id AND actorid = (SELECT id FROM actor WHERE name = 'Harrison Ford' AND ord!= 1));
+
+    # List the films together with the leading star for all 1962 films.
+
+    SELECT title, name
+FROM casting 
+     JOIN movie ON (casting.movieid=movie.id)
+     JOIN actor ON (casting.actorid=actor.id)
+WHERE yr = 1962 AND
+      ord = 1;
